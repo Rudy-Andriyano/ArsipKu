@@ -137,6 +137,12 @@ public function index(Request $request)
                 'arsip_pinjam' => $request->arsip_pinjam,
                 'tanggal_pinjam' => $request->tanggal_pinjam,
             ]);
+            $pengingat = Pengingat::where('peminjaman_id', $peminjaman->id)->first();
+            if ($pengingat) {
+                $pengingat->update([
+                    'tenggat' => Carbon::parse($request->tanggal_pinjam)->addDays(3)
+                ]);
+            }
             return redirect()->route('peminjaman.index')->with('success','data sudah di perbarui');
     }
 
