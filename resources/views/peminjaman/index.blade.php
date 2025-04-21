@@ -44,31 +44,32 @@
 
 
 <body>
-<!-- Layout wrapper -->
-<div class="layout-wrapper layout-content-navbar">
-  <div class="layout-container">
-  <!-- Menu -->
-
-
-  <!-- / Menu -->
-
-  <!-- Layout container -->
-  <div class="layout-page">
-    <!-- Navbar Atas Yang Ada Foto Profil -->
-    
-    <!-- / Navbar Atas Yang Ada Foto Profil -->
-
-    <!-- Konten Utama -->
-    <div class="content-wrapper">
-    <!-- Konten -->
-    <div class="container-xxl flex-grow-1 container-p-y">
-      <div class="row">
-      <div class="col-lg-8 mb-4 order-0">
-        <div class="card">
-        <div class="d-flex align-items-end row">
-          <div class="col-sm-7">
-          <div class="card-body ">
-            <h5 class="card-title text-primary">Selamat Datang Di Peminjaman Arsip</h5>
+  <!-- Layout wrapper -->
+  <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+      <!-- Menu -->
+      
+      
+      <!-- / Menu -->
+      
+      <!-- Layout container -->
+      <div class="layout-page">
+        <!-- Navbar Atas Yang Ada Foto Profil -->
+        
+        <!-- / Navbar Atas Yang Ada Foto Profil -->
+        
+        <!-- Konten Utama -->
+        <div class="content-wrapper">
+          <!-- Konten -->
+          <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-2 mb-4"><span class="text-muted fw-light">Dashboard</h4>
+            <div class="row">
+              <div class="col-lg-8 mb-4 order-0">
+                <div class="card">
+                  <div class="d-flex align-items-end row">
+                    <div class="col-sm-7">
+                      <div class="card-body ">
+                        <h5 class="card-title text-primary">Selamat Datang Di Peminjaman Arsip</h5>
             <p class="mb-3">
             Sistem peminjaman arsip ini dirancang untuk mempermudah pengelolaan dokumen penting. 
             Anda dapat meminjam arsip dengan cepat dan praktis melalui fitur yang tersedia.
@@ -112,41 +113,37 @@
       </div>
     </div>
     <!-- Table -->
-    <h4 class="fw-bold py-2 mb-4"><span class="text-muted fw-light">Dashboard</h4>
-    <!-- Search bar -->
-    <div class="card">
-      <div class="card-header d-flex justify-content-between align-items-center">
-        <h4>Cari Data Peminjaman</h4>
-        </div>
-    <form action="{{ route('peminjaman.index') }}" method="GET" class="mb-4">
-      <div class="card-header d-flex justify-content-between align-items-center">
-        <div class="col-md-4">
-          <select name="category" class="form-select">
-            <option value="">Select Category</option>
-            <option value="arsip_pinjam" {{ request('category') == 'arsip_pinjam' ? 'selected' : '' }}>Arsip Pinjam</option>
-            <option value="perihal" {{ request('category') == 'perihal' ? 'selected' : '' }}>Perihal</option>
-            <option value="status" {{ request('category') == 'status' ? 'selected' : '' }}>Status</option>
-          </select>
-        </div>
-        <div class="col-md-4">
-          <input type="text" name="search" class="form-control" value="{{ request('search') }}" placeholder="Search...">
-        </div>
-        <div class="col-md-4">
-          <button type="submit" class="btn btn-primary">Search</button>
-        </div>
-      </div>
-    </form>
-    
-    </div>
-    <!-- /Search bar -->
-    <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="container-xxl flex-grow-1 pt-0">
       
       
         <!--  -->
         <div class="card">
+          
         <div class="card-header d-flex justify-content-between align-items-center">
           <h4>LIST ARSIP YANG SEDANG DIPINJAM</h4>
         </div>
+        {{-- Search Bar --}}
+        <div class="container mb-4">
+          <form action="{{ route('peminjaman.index') }}" method="GET">
+            <div class="row g-3 align-items-center">
+              <div class="col-md-4">
+                <select name="category" class="form-select">
+                  <option value="">Select Category</option>
+                  <option value="arsip_pinjam" {{ request('category') == 'arsip_pinjam' ? 'selected' : '' }}>Arsip Pinjam</option>
+                  <option value="perihal" {{ request('category') == 'perihal' ? 'selected' : '' }}>Perihal</option>
+                  <option value="status" {{ request('category') == 'status' ? 'selected' : '' }}>Status</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <input type="text" name="search" class="form-control" value="{{ request('search') }}" placeholder="Search...">
+              </div>
+              <div class="col-md-4">
+                <button type="submit" class="btn btn-primary w-100">Search</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        {{-- End Search Bar --}}
         <div class="card-body">
           <div class="table-responsive text-nowrap">
           @if($peminjamans->isNotEmpty())

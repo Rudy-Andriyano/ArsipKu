@@ -58,33 +58,10 @@
           <!-- / Navbar Atas Yang Ada Foto Profil -->
 
         <!-- Konten Utama -->
-        <div class="content-wrapper">
-          <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-              <h4>Cari Penanggung jawab Kearsipan</h4>
-              </div>
-            <form action="{{ route('kearsipan.index') }}" method="GET" class="mb-4">
-              <div class="card-header d-flex justify-content-between align-items-center">
-                  <div class="col-md-4">
-                      <select name="category" class="form-select">
-                          <option value="">Select Category</option>
-                          <option value="nama" {{ request('category') == 'nama' ? 'selected' : '' }}>nama</option>
-                          <option value="nip" {{ request('category') == 'nip' ? 'selected' : '' }}>nip</option>
-                      </select>
-                  </div>
-                  <div class="col-md-4">
-                      <input type="text" name="search" class="form-control" value="{{ request('search') }}" placeholder="Search...">
-                  </div>
-                  <div class="col-md-4">
-                      <button type="submit" class="btn btn-primary">Search</button>
-                  </div>
-              </div>
-          </form>
-            <!-- /Search bar -->
-          </div>
+        
             <!-- Konten -->
             <div class="container-xxl flex-grow-1 container-p-y">
-                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tambah Data</span>Penanggung jawab arsip</h4>
+                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tambah Data/</span>Penanggung jawab arsip</h4>
                 <!-- Hover Table -->
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
@@ -92,6 +69,25 @@
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
                         Tambah Penanggung jawab arsip
                     </button>
+                    </div>
+                    <div class="container mb-4">
+                      <form action="{{ route('kearsipan.index') }}" method="GET">
+                        <div class="row g-3 align-items-center">
+                          <div class="col-md-4">
+                            <select name="category" class="form-select">
+                              <option value="">Select Category</option>
+                              <option value="nama" {{ request('category') == 'nama' ? 'selected' : '' }}>Nama</option>
+                              <option value="nip" {{ request('category') == 'nip' ? 'selected' : '' }}>NIP</option>
+                            </select>
+                          </div>
+                          <div class="col-md-4">
+                            <input type="text" name="search" class="form-control" value="{{ request('search') }}" placeholder="Search...">
+                          </div>
+                          <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary w-100">Search</button>
+                          </div>
+                        </div>
+                      </form>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive text-nowrap">

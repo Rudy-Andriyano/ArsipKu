@@ -105,13 +105,13 @@
             <ul class="menu-inner py-1">
               <!-- /Menu -->
               <!-- Nav Bagian Kanan -->
-              <li class="menu-item ">
+              <li class="menu-item {{ request()->routeIs('peminjaman.index') ? 'active' : '' }}">
                 <a href="{{route('peminjaman.index')}}" class="menu-link">
                   <i class="menu-icon tf-icons bx bx-home-circle"></i>
                   <div data-i18n="Analytics">Dashboard</div>
                 </a>
               </li>
-              <li class="menu-item ">
+              <li class="menu-item {{ request()->routeIs('peminjaman.create') ? 'active' : '' }}">
                 <a href="{{route('peminjaman.create')}}" class="menu-link">
                   <i class="menu-icon tf-icons bx bx-file"></i>
                   <div data-i18n="Analytics">Pinjam Arsip</div>
