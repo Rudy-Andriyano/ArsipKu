@@ -105,6 +105,7 @@
                                     <th>JABATAN</th>
                                     <th>JENIS KELAMIN</th>
                                     <th>UNIT KERJA</th>
+                                    <th>NOMOR HP</th>
                                     <th>AKSI</th>
                                 </tr>
                             </thead>
@@ -133,6 +134,7 @@
                             <td>{{$pegawai->jabatan}}</td>
                             <td>{{$pegawai->jenis_kelamin}}</td>
                             <td>{{$pegawai->unit_kerja}}</td>
+                            <td>{{$pegawai->nomor_hp}}</td>
                                 <td>
                                     <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
