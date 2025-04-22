@@ -153,6 +153,7 @@
               <th>NAMA PEGAWAI</th>
               <th>PENANGGUNG JAWAB</th>
               <th>ARSIP YANG DIPINJAM</th>
+              <th>PERIHAL</th>
               <th>WAKTU PINJAM</th>
               <th>WAKTU KEMBALI</th>
               <th>STATUS</th>
@@ -168,6 +169,7 @@
               <td>{{ $peminjam->pegawai->nama_pegawai }}</td>
               <td>{{ $peminjam->kearsipan->nama }}</td>
               <td>{{ $peminjam->arsip_pinjam }}</td>
+              <td>{{ $peminjam->perihal}}</td>
               <td>{{ $peminjam->tanggal_pinjam }}</td>
                 @if ($peminjam->tanggal_kembali== null )
                 <td>Belum DiKembalikan</td>
