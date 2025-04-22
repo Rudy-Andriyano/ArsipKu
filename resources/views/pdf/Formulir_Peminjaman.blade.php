@@ -47,8 +47,8 @@ td, th {
 					<td style="width:53pt; border-bottom:4.5pt solid #000000; padding:0pt 5.4pt; vertical-align:top">
 						<p style="margin-bottom:0pt; line-height:normal; font-size:12pt">
 							<a id="_Hlk148686471">
-								<span style="height:0pt; display:block; position:absolute; z-index:1">
-									<img src="{{ asset('storage/assets/image.png') }}" width="83" height="97" alt="Logo Kota" style="margin-top:0.35pt; margin-left:0pt; position:absolute;" />
+								<span style="height:97pt; display:block; position:absolute; z-index:1">
+									<img src="{{ asset('storage/assets/image.png') }}" width="83" height="97" alt="Logo Kota">
 								</span>
 							</a>
 														</span><span style="height:0pt; display:block; position:absolute; z-index:0"><map name="awmap1"><area shape="rect" href="mailto:disdukcapil@tanjungpinangkota.go.id" alt="" coords="100,41,363,60" /></map></span><span style="font-family:Arial">&#xa0;</span></a>
@@ -62,10 +62,10 @@ td, th {
 							<strong><span style="font-family:Tahoma; ">&#xa0;</span></strong><strong><span style="font-family:Tahoma; ">DINAS KEPENDUDUKAN DAN PENCATATAN SIPIL</span></strong>
 						</p>
 						<p style="margin-bottom:0pt; text-align:center; line-height:normal; font-size:12pt">
-							<strong><span style="font-family:Tahoma; ">&#xa0;</span></strong>
+							<span style="font-family:Tahoma; ">Jalan Kijang Lama No. 85 - Tanjungpinang</span>
 						</p>
 						<p style="margin-bottom:0pt; text-align:center; line-height:normal; font-size:12pt">
-							<strong><span style="font-family:Tahoma; ">&#xa0;</span></strong>
+							<span style="font-family:Tahoma; ">Email: disdukcapil@tanjungpinangkota.go.id,  Kode Pos. 29123</span>
 						</p>
 					</td>
 				</tr>
@@ -137,7 +137,7 @@ td, th {
 			<p style="margin-bottom:0pt; line-height:150%; font-size:12pt">
 				<span style="font-family:'Times New Roman'">NIP. </span>
 <span style="font-family:'Times New Roman'; display:inline-block; vertical-align:middle; margin-right:10px;">
-    {{ $peminjam->kearsipan->nama }}
+    {{ $peminjam->kearsipan->nip }} - {{ $peminjam->kearsipan->nama}}
 </span>
 <span style="font-family:'Times New Roman'; margin-right:36pt;">&#xa0;</span>
 <span style="font-family:'Times New Roman'; margin-right:36pt;">&#xa0;</span>
