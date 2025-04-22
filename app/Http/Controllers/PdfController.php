@@ -11,17 +11,24 @@ class PdfController extends Controller
 {
     public function generatePdf($id)
 {
-    // Ambil data peminjaman dan relasi pegawai & arsip
+    // Absolute path to the image (use the correct path to the public folder)
+    $imagePath = public_path('storage/assets/image.png');  // Assuming the image is in the "storage" folder
+
+    // Fetch the data for peminjaman and related data
     $peminjam = Peminjaman::with(['pegawai'])->findOrFail($id);
 
-    // Absolute path for Dompdf compatibility
-    $imagePath = public_path('storage/assets/image.png');
-
+    // Pass the data to the view
     $data = compact('peminjam', 'imagePath');
 
-    $pdf = PDF::loadView('pdf.formulir_peminjaman', $data);
-    return $pdf->download('formulir_peminjaman_'.$peminjam->id.'.pdf');
+    // Render the view
+    $view = view('pdf.formulir_peminjaman', ['logoSrc' => $imagePath, 'peminjam' => $peminjam])->render();
+
+    // Generate the PDF
+    $pdf = PDF::loadHTML($view);
+
+    return $pdf->download('formulir_peminjaman_' . $peminjam->id . '.pdf');
 }
+
 
 
 

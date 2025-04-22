@@ -48,10 +48,10 @@ td, th {
 						<p style="margin-bottom:0pt; line-height:normal; font-size:12pt">
 							<a id="_Hlk148686471">
 								<span style="height:97pt; display:block; position:absolute; z-index:1">
-									<img src="{{ asset('storage/assets/image.png') }}" width="83" height="97" alt="Logo Kota">
+									<img src="{{ $logoSrc }}" alt="Logo Kota" style="max-height: 85px; display: block;">
 								</span>
 							</a>
-														</span><span style="height:0pt; display:block; position:absolute; z-index:0"><map name="awmap1"><area shape="rect" href="mailto:disdukcapil@tanjungpinangkota.go.id" alt="" coords="100,41,363,60" /></map></span><span style="font-family:Arial">&#xa0;</span></a>
+							</span><span style="height:0pt; display:block; position:absolute; z-index:0"><map name="awmap1"><area shape="rect" href="mailto:disdukcapil@tanjungpinangkota.go.id" alt="" coords="100,41,363,60" /></map></span><span style="font-family:Arial">&#xa0;</span></a>
 						</p>
 					</td>
 					<td style="width:407.35pt; border-bottom:4.5pt solid #000000; padding:0pt 5.4pt; vertical-align:top">
