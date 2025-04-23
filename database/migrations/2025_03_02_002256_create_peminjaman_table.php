@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreignId('kearsipan_id')->constrained('kearsipans')->onDelete('cascade');
             $table->string('arsip_pinjam');
             $table->string('perihal');
+            $table->string('bukti_peminjaman');
+            $table->string('bukti_pengembalian')->nullable();
             $table->date('tanggal_pinjam');
             $table->date('tanggal_kembali')->nullable();
             $table->enum('status', ['dipinjam', 'dikembalikan'])->default('dipinjam');

@@ -76,14 +76,20 @@ public function index(Request $request)
         'pegawai_id' => 'required|exists:pegawais,id',
         'kearsipan_id' => 'required|exists:kearsipans,id',
         'perihal' => 'required|string|max:255',
+        'photo' => 'required|image|max:2048',
         'arsip_pinjam' => 'required|string|max:255',
         
         ]);
+        $photo = $request->file('photo');
+        $path = $photo->store('photos','public');
+        
+
         $peminjaman =Peminjaman::create([
             'pegawai_id' => $request->pegawai_id,
             'kearsipan_id' => $request->kearsipan_id,
             'perihal' => $request->perihal,
             'arsip_pinjam' => $request->arsip_pinjam,
+            'bukti_peminjaman' => $path,
             'tanggal_pinjam' => now(),
         ]);
 
@@ -102,6 +108,10 @@ public function index(Request $request)
     public function show(Peminjaman $peminjaman)
     {
         //
+        $peminjaman = Peminjaman::findOrFail($peminjaman->id);
+        $kearsipans = kearsipan::all(); // Ambil semua arsip dari database
+        $pegawais = Pegawai::all(); // Ambil semua arsip dari database
+        return view('peminjaman.show', compact('peminjaman', 'pegawais', 'kearsipans'));
     }
 
     /**
@@ -137,6 +147,9 @@ public function index(Request $request)
                 'arsip_pinjam' => $request->arsip_pinjam,
                 'tanggal_pinjam' => $request->tanggal_pinjam,
             ]);
+           
+
+
             $pengingat = Pengingat::where('peminjaman_id', $peminjaman->id)->first();
             if ($pengingat) {
                 $pengingat->update([
@@ -159,23 +172,50 @@ public function index(Request $request)
         $peminjaman->delete();
         return redirect()->route('peminjaman.index')->with('success', 'Data berhasil dihapus!');
     }
-    public function updateStatus($id)
+    public function pengembalian(Peminjaman $peminjaman)
+{
+    $peminjaman = Peminjaman::findOrFail($peminjaman->id);
+    $kearsipans = kearsipan::all(); // Ambil semua arsip dari database
+    $pegawais = Pegawai::all(); // Ambil semua arsip dari database
+    return view('peminjaman.pengembalian', compact('peminjaman', 'pegawais', 'kearsipans'));
+}
+    public function processPengembalian(Request $request, Peminjaman $peminjaman)
     {
-        // Ambil data peminjaman berdasarkan ID
-        $peminjaman = Peminjaman::findOrFail($id);
-    
-        // Langsung ubah status menjadi 'dikembalikan'
-        if ($peminjaman->status != 'dikembalikan') {
-            $peminjaman->status = 'dikembalikan';
-            $peminjaman->tanggal_kembali = now(); // Mengisi dengan tanggal dan waktu sekarang
-        }
-    
-    
-        // Simpan perubahan ke database
-        $peminjaman->save();
-    
-        // Redirect kembali dengan pesan sukses
-        return redirect()->back()->with('success', 'Arsip berhasil dikembalikan!');
+        //
+        $request->validate([
+            
+            'photo' => 'required|image|max:2048',
+
+            ]);
+            $photo = $request->file('photo');
+            $path = $photo->store('photos','public');
+
+            $peminjaman->update([
+                
+                'bukti_pengembalian'=>$path,
+
+            ]);
+
+            $this->updateStatusInternal($peminjaman);
+
+            return redirect()->route('peminjaman.index')->with('success','data sudah di perbarui');
     }
+    protected function updateStatusInternal(Peminjaman $peminjaman)
+{
+    // Update status logic
+    if ($peminjaman->status != 'dikembalikan') {
+        $peminjaman->status = 'dikembalikan';
+        $peminjaman->tanggal_kembali = now();
+        $peminjaman->save();
+    }
+}
+
+// Keep the original public method for direct route access
+public function updateStatus($id)
+{
+    $peminjaman = Peminjaman::findOrFail($id);
+    $this->updateStatusInternal($peminjaman);
+    return redirect()->back()->with('success', 'Arsip berhasil dikembalikan!');
+}
     
     }

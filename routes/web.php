@@ -16,6 +16,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('pegawai', PegawaiController::class);
     
     Route::resource('peminjaman', PeminjamanController::class);
+    Route::get('peminjaman/{peminjaman}/pengembalian', [PeminjamanController::class, 'pengembalian'])->name('peminjaman.pengembalian');
+    Route::put('peminjaman/{peminjaman}/process-pengembalian', [PeminjamanController::class, 'processPengembalian'])
+    ->name('peminjaman.processPengembalian');
+    
     Route::resource('kearsipan', KearsipanController::class);
 
     Route::get('/', function () {

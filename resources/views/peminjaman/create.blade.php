@@ -86,6 +86,11 @@
                 </select>
                 
                 </div>
+                <div class="mb-3">
+                  <label for="user_id" class="form-label">Bukti Peminjaman</label>
+                  <td><input type="file" name="photo" required></td>
+                
+                </div>
                 
                 
                 <div class="mb-3">

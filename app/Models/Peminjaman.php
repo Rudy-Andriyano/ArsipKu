@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Peminjaman extends Model
 {
-    protected $fillable = ['pegawai_id', 'kearsipan_id','perihal','arsip_pinjam', 'tanggal_pinjam', 'tanggal_kembali','status'];
+    protected $fillable = ['pegawai_id', 'kearsipan_id','perihal','arsip_pinjam', 'tanggal_pinjam','bukti_peminjaman','bukti_pengembalian', 'tanggal_kembali','status'];
 
     // Setiap peminjaman hanya memiliki satu arsip
     public function pengingat()

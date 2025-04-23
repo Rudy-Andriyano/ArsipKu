@@ -180,11 +180,7 @@
               <td>{{ $peminjam->status}}</td>
               <td>
                 @if($peminjam->status == 'dipinjam')
-                  <form action="{{ route('peminjaman.updateStatus', $peminjam->id) }}" method="POST">
-                    @csrf
-                    @method('PATCH')
-                    <button type="submit" class="btn btn-success" onclick="return confirm('Apakah Anda Yakin Arsip sudah di kembalikan?')">Kembalikan</button>
-                  </form>
+                <a href="{{ route('peminjaman.pengembalian', $peminjam->id) }}" class="btn btn-warning">Proses Pengembalian</a>
                   @else
                   <button type="submit" class="btn btn-success" disabled>{{$peminjam->status}}</button>
                 @endif
@@ -201,11 +197,11 @@
                     <i class="bx bx-dots-vertical-rounded"></i>
                       </button>
                     <div class="dropdown-menu">
-                      
-                      
-
                       <a href="{{ route('generate.pdf', $peminjam->id) }}" class="dropdown-item">
                       <i class="bx bx-download me-2"></i> Download PDF
+                    </a>
+                      <a href="{{ route('peminjaman.show', $peminjam->id) }}" class="dropdown-item">
+                      <i class="bx bx-download me-2"></i> Detail
                     </a>
               
               <form action="{{route('peminjaman.destroy',$peminjam->id)}}" method="POST">
