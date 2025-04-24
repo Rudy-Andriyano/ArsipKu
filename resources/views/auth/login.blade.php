@@ -62,7 +62,7 @@
             <div class="card-body">
               <!-- Logo -->
               <div class="app-brand justify-content-center">
-                <a href="index.html" class="app-brand-link gap-2 d-flex flex-column align-items-center text-decoration-none">
+                <a href="{{ route('login') }}" class="app-brand-link gap-2 d-flex flex-column align-items-center text-decoration-none">
                   <span>
                       <img src="{{ asset('storage/assets/image.png') }}" alt="Logo" width="80">
                   </span>
