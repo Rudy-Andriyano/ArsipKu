@@ -23,6 +23,16 @@
               @endforeach
             </select>
           </div>
+
+          <div class="mb-3">
+            <label for="kearsipan_id" class="form-label">Penanggung Jawab</label>
+            <tr>
+              <td><label for="photo">Pilih Foto</label></td>
+              <td><input type="file" name="photo">
+              <small>Biarkan kosong jika tidak ingin mengubah foto</small></td>
+          </tr>
+          </div>
+          
           <div class="mb-3">
             <label for="kearsipan_id" class="form-label">Penanggung Jawab</label>
             <select class="form-select" name="kearsipan_id" id="kearsipan_id" required>
