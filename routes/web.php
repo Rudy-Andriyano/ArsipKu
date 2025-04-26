@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\kearsipanController;
+use App\Http\Controllers\BackupRestoreController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\AuthController;
 
@@ -13,6 +14,10 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middle
 
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/backup', [BackupRestoreController::class, 'backup'])->name('backup');
+    Route::post('/restore', [BackupRestoreController::class, 'restore'])->name('restore');
+    
+
     Route::resource('pegawai', PegawaiController::class);
     
     Route::resource('peminjaman', PeminjamanController::class);

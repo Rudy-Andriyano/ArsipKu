@@ -148,6 +148,18 @@
         </div>
         {{-- End Search Bar --}}
         <div class="card-body">
+          <a href="{{ route('backup') }}" class="btn btn-success">Download Backup</a>
+
+<!-- Restore Form masih gagal -->
+{{-- <form action="{{ route('restore') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div>
+        <label>Upload Backup File:</label>
+        <input type="file" name="file" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Restore</button>
+</form> --}}
+
           <div class="table-responsive text-nowrap">
           @if($peminjamans->isNotEmpty())
           <table id="datatable" class="table table-hover">

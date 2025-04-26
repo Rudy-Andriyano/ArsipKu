@@ -64,7 +64,13 @@ public function index(Request $request)
         $pegawais = Pegawai::all(); // Ambil semua arsip dari database
         return view('peminjaman.create', compact('kearsipans','pegawais'));
     }
+    public function cadangkanData()
+{
+   return view('peminjaman.cadangkandata'); 
+}
 
+
+    
     /**
      * Store a newly created resource in storage.
      */
