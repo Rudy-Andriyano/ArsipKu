@@ -61,6 +61,11 @@
           <button class="btn btn-primary" type="submit">Update</button>
           <a href="{{ route('peminjaman.index') }}" class="btn btn-secondary">Batal</a>
         </form>
+        <form action="{{ route('peminjaman.tambahHari', $peminjaman->id) }}" method="POST">
+          @csrf
+          @method('PATCH')
+          <button type="submit" class="btn btn-primary">Tambah Tenggat 3 Hari</button>
+      </form>
       </div>
     </div>
   </div>

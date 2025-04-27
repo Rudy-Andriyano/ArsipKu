@@ -45,8 +45,8 @@ class PegawaiController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+{
+    try {
         $request->validate([
             'nama_pegawai' => 'required|string|max:255',
             'jenis_kelamin' => 'required|string|max:255',
@@ -55,9 +55,13 @@ class PegawaiController extends Controller
             'unit_kerja' => 'required|string|max:255',
             'nomor_hp' => 'required|string|max:255',
         ]);
+
         Pegawai::create($request->all());
-        return redirect()->route('pegawai.index');
+        return redirect()->route('pegawai.index')->with('success', 'Data berhasil ditambahkan!');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
     }
+}
 
     /**
      * Display the specified resource.
@@ -79,8 +83,8 @@ class PegawaiController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Pegawai $pegawai)
-    {
-        //
+{
+    try {
         $request->validate([
             'nama_pegawai' => 'required|string|max:255',
             'jenis_kelamin' => 'required|string|max:255',
@@ -89,17 +93,25 @@ class PegawaiController extends Controller
             'unit_kerja' => 'required|string|max:255',
             'nomor_hp' => 'required|string|max:255',
         ]);
+
         $pegawai->update($request->all());
-        return redirect()->route('pegawai.index');
+        return redirect()->route('pegawai.index')->with('success', 'Data berhasil diperbarui!');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
     }
+}
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Pegawai $pegawai)
 {
-    $pegawai->delete();
-    return redirect()->route('pegawai.index')->with('success', 'Data Pegawai berhasil dihapus.');
+    try {
+        $pegawai->delete();
+        return redirect()->route('pegawai.index')->with('success', 'Data Pegawai berhasil dihapus.');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+    }
 }
 public function updateStatus($id)
     {

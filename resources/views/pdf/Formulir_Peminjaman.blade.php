@@ -142,13 +142,13 @@ td, th {
 <span style="font-family:'Times New Roman'; margin-right:36pt;">&#xa0;</span>
 <span style="font-family:'Times New Roman'; margin-right:36pt;">&#xa0;</span>
 <span style="font-family:'Times New Roman'; margin-right:36pt;">&#xa0;</span>
-<span style="font-family:'Times New Roman'; margin-right:36pt;">&#xa0;</span>
-<span style="font-family:'Times New Roman'; margin-right:36pt;">&#xa0;</span>
 
 
-<span style="font-family:'Times New Roman'">NIP.</span>
+
+<span style="font-family:'Times New Roman'">NIP. {{ $peminjam->pegawai->nip }} - {{ $peminjam->pegawai->nama_pegawai}}</span>
 
 			</p>
+			
 			<p style="margin-bottom:0pt; line-height:150%; font-size:12pt">
 				<span style="font-family:'Times New Roman'">&#xa0;</span>
 			</p>
@@ -180,8 +180,9 @@ td, th {
 				<span style="font-family:BookmanOldStyle">Dikembalikan pada :  {{$peminjam->tanggal_kembali}}</span>
 			</p>
 			<p style="margin-bottom:0pt; text-indent:290.6pt; line-height:normal; font-size:12pt">
-				<span style="font-family:'Times New Roman'">Tanjungpinang,……………………</span>
+				<span style="font-family:'Times New Roman'">Tanjungpinang, {{$peminjam->tanggal_kembali}}</span>
 			</p>
+			@if ($peminjam->status == 'dikembalikan')
 			<p style="margin-bottom:0pt; line-height:normal; font-size:12pt">
 				<span style="font-family:'Times New Roman'">Petugas yang melayani, </span><span style="width:27.36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="font-family:'Times New Roman'">yang mengembalikan,</span>
 			</p>
@@ -192,10 +193,27 @@ td, th {
 				<span style="font-family:'Times New Roman'">&#xa0;</span>
 			</p>
 			<p style="margin-bottom:0pt; line-height:150%; font-size:12pt">
-				<span style="font-family:'Times New Roman'">( ……………………………… ) </span><span style="width:19.01pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="font-family:'Times New Roman'">&#xa0;&#xa0;&#xa0;&#xa0; </span><span style="font-family:'Times New Roman'">(……………………………… )</span>
+				<span style="font-family:'Times New Roman'">(   ……………………………… ) </span><span style="width:19.01pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="font-family:'Times New Roman'">&#xa0;&#xa0;&#xa0;&#xa0; </span><span style="font-family:'Times New Roman'">(……………………………… )</span>
+			</p>
+			<p style="margin-bottom:0pt; line-height:150%; font-size:12pt">
+				<span style="font-family:'Times New Roman'">NIP. {{ $peminjam->kearsipan->nip }} - {{ $peminjam->kearsipan->nama}}</span><span style="width:10.66pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="font-family:'Times New Roman'">NIP. {{ $peminjam->pegawai->nip }} - {{ $peminjam->pegawai->nama_pegawai}} </span>
+			</p>
+			@else
+			
+			<p style="margin-bottom:0pt; line-height:normal; font-size:12pt">
+				<span style="font-family:'Times New Roman'">Petugas yang melayani, </span><span style="width:27.36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="font-family:'Times New Roman'">yang mengembalikan,</span>
+			</p>
+			<p style="margin-bottom:0pt; line-height:150%; font-size:12pt">
+				<br /><span style="font-family:'Times New Roman'">&#xa0;</span>
+			</p>
+			<p style="margin-bottom:0pt; line-height:150%; font-size:12pt">
+				<span style="font-family:'Times New Roman'">&#xa0;</span>
+			</p>
+			<p style="margin-bottom:0pt; line-height:150%; font-size:12pt">
+				<span style="font-family:'Times New Roman'">( ……………………………… ) </span><span style="width:19.01pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="font-family:'Times New Roman'">&#xa0;&#xa0;&#xa0;&#xa0; </span><span style="font-family:'Times New Roman'">( ……………………………… )</span>
 			</p>
 			<p style="margin-bottom:0pt; line-height:150%; font-size:12pt">
 				<span style="font-family:'Times New Roman'">NIP. </span><span style="width:10.66pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="width:36pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="font-family:'Times New Roman'">&#xa0;&#xa0;&#xa0;&#xa0; </span><span style="font-family:'Times New Roman'">NIP.</span>
 			</p>
-			
+			@endif
 					

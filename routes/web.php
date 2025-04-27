@@ -16,6 +16,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middle
 Route::middleware(['auth'])->group(function () {
     Route::get('/backup', [BackupRestoreController::class, 'backup'])->name('backup');
     Route::post('/restore', [BackupRestoreController::class, 'restore'])->name('restore');
+    Route::patch('/peminjaman/{id}/tambah-hari', [PeminjamanController::class, 'tambahHari'])->name('peminjaman.tambahHari');
     
 
     Route::resource('pegawai', PegawaiController::class);

@@ -75,22 +75,20 @@ public function index(Request $request)
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-        
+{
+    try {
         $request->validate([
-        'pegawai_id' => 'required|exists:pegawais,id',
-        'kearsipan_id' => 'required|exists:kearsipans,id',
-        'perihal' => 'required|string|max:255',
-        'photo' => 'required|image|max:2048',
-        'arsip_pinjam' => 'required|string|max:255',
-        
+            'pegawai_id' => 'required|exists:pegawais,id',
+            'kearsipan_id' => 'required|exists:kearsipans,id',
+            'perihal' => 'required|string|max:255',
+            'photo' => 'required|image|max:2048',
+            'arsip_pinjam' => 'required|string|max:255',
         ]);
-        $photo = $request->file('photo');
-        $path = $photo->store('photos','public');
-        
 
-        $peminjaman =Peminjaman::create([
+        $photo = $request->file('photo');
+        $path = $photo->store('photos', 'public');
+
+        $peminjaman = Peminjaman::create([
             'pegawai_id' => $request->pegawai_id,
             'kearsipan_id' => $request->kearsipan_id,
             'perihal' => $request->perihal,
@@ -99,14 +97,16 @@ public function index(Request $request)
             'tanggal_pinjam' => now(),
         ]);
 
-      
         Pengingat::create([
-            'peminjaman_id'=> $peminjaman->id,
-            'tenggat' => Carbon::now()->addDays(3)
+            'peminjaman_id' => $peminjaman->id,
+            'tenggat' => now()->addDays(3),
         ]);
-       
-        return redirect()->route('peminjaman.index')->with('success','Peminjaman sudah di buat');
+
+        return redirect()->route('peminjaman.index')->with('success', 'Peminjaman sudah dibuat');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
     }
+}
 
     /**
      * Display the specified resource.
@@ -137,15 +137,15 @@ public function index(Request $request)
      */
     public function update(Request $request, Peminjaman $peminjaman)
     {
-        //
-        $request->validate([
-            'pegawai_id' => 'required|exists:pegawais,id',
-            'kearsipan_id' => 'required|exists:kearsipans,id',
-            'perihal' => 'required|string|max:255',
-            'arsip_pinjam' => 'required|string|max:255',
-            'tanggal_pinjam' =>'required|date'
+        try {
+            $request->validate([
+                'pegawai_id' => 'required|exists:pegawais,id',
+                'kearsipan_id' => 'required|exists:kearsipans,id',
+                'perihal' => 'required|string|max:255',
+                'arsip_pinjam' => 'required|string|max:255',
+                'tanggal_pinjam' => 'required|date',
             ]);
-            
+    
             $peminjaman->update([
                 'pegawai_id' => $request->pegawai_id,
                 'kearsipan_id' => $request->kearsipan_id,
@@ -153,31 +153,36 @@ public function index(Request $request)
                 'arsip_pinjam' => $request->arsip_pinjam,
                 'tanggal_pinjam' => $request->tanggal_pinjam,
             ]);
-           
-
-
+    
             $pengingat = Pengingat::where('peminjaman_id', $peminjaman->id)->first();
             if ($pengingat) {
                 $pengingat->update([
-                    'tenggat' => Carbon::parse($request->tanggal_pinjam)->addDays(3)
+                    'tenggat' => now()->parse($request->tanggal_pinjam)->addDays(3),
                 ]);
             }
-            return redirect()->route('peminjaman.index')->with('success','data sudah di perbarui');
+    
+            return redirect()->route('peminjaman.index')->with('success', 'Data sudah diperbarui');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Peminjaman $peminjaman)
-    {
-        //
+{
+    try {
         if ($peminjaman->status != 'dipinjam') {
             return redirect()->back()->with('error', 'Data tidak bisa dihapus karena status sudah dikembalikan!');
         }
-    
+
         $peminjaman->delete();
         return redirect()->route('peminjaman.index')->with('success', 'Data berhasil dihapus!');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
     }
+}
     public function pengembalian(Peminjaman $peminjaman)
 {
     $peminjaman = Peminjaman::findOrFail($peminjaman->id);
@@ -185,27 +190,27 @@ public function index(Request $request)
     $pegawais = Pegawai::all(); // Ambil semua arsip dari database
     return view('peminjaman.pengembalian', compact('peminjaman', 'pegawais', 'kearsipans'));
 }
-    public function processPengembalian(Request $request, Peminjaman $peminjaman)
-    {
-        //
+public function processPengembalian(Request $request, Peminjaman $peminjaman)
+{
+    try {
         $request->validate([
-            
             'photo' => 'required|image|max:2048',
+        ]);
 
-            ]);
-            $photo = $request->file('photo');
-            $path = $photo->store('photos','public');
+        $photo = $request->file('photo');
+        $path = $photo->store('photos', 'public');
 
-            $peminjaman->update([
-                
-                'bukti_pengembalian'=>$path,
+        $peminjaman->update([
+            'bukti_pengembalian' => $path,
+        ]);
 
-            ]);
+        $this->updateStatusInternal($peminjaman);
 
-            $this->updateStatusInternal($peminjaman);
-
-            return redirect()->route('peminjaman.index')->with('success','data sudah di perbarui');
+        return redirect()->route('peminjaman.index')->with('success', 'Data sudah diperbarui');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
     }
+}
     protected function updateStatusInternal(Peminjaman $peminjaman)
 {
     // Update status logic
@@ -223,5 +228,22 @@ public function updateStatus($id)
     $this->updateStatusInternal($peminjaman);
     return redirect()->back()->with('success', 'Arsip berhasil dikembalikan!');
 }
+public function tambahHari($id)
+{
+    // Temukan peminjaman berdasarkan ID
+    $peminjaman = Peminjaman::findOrFail($id);
     
+    // Temukan pengingat yang terkait dengan peminjaman
+    $pengingat = Pengingat::where('peminjaman_id', $peminjaman->id)->first();
+    
+    // Periksa tanggal pinjam
+    $pengingat->update([
+        'tenggat' => now()->parse($pengingat->tanggal_pinjam)->addDays(3),
+    ]);
+
+    // Redirect kembali dengan pesan sukses
+    return redirect()->back()->with('success', 'Tenggat berhasil ditambah 3 hari!');
+
+
     }
+}

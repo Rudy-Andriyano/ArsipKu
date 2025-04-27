@@ -46,8 +46,8 @@ class KearsipanController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+{
+    try {
         $request->validate([
             'nama' => 'required|string|max:255',
             'jenis_kelamin' => 'required|string|max:255',
@@ -55,9 +55,13 @@ class KearsipanController extends Controller
             'jabatan' => 'required|string|max:255',
             'nomor_hp' => 'required|string|max:255',
         ]);
+
         kearsipan::create($request->all());
-        return redirect()->route('kearsipan.index');
+        return redirect()->route('kearsipan.index')->with('success', 'Data berhasil ditambahkan!');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
     }
+}
 
     /**
      * Display the specified resource.
@@ -79,8 +83,8 @@ class KearsipanController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, kearsipan $kearsipan)
-    {
-        //
+{
+    try {
         $request->validate([
             'nama' => 'required|string|max:255',
             'jenis_kelamin' => 'required|string|max:255',
@@ -88,19 +92,26 @@ class KearsipanController extends Controller
             'jabatan' => 'required|string|max:255',
             'nomor_hp' => 'required|string|max:255',
         ]);
+
         $kearsipan->update($request->all());
         return redirect()->route('kearsipan.index')->with('success', 'Status berhasil diperbarui!');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
     }
+}
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(kearsipan $kearsipan)
-    {
-        //
+{
+    try {
         $kearsipan->delete();
-        return redirect()->route('kearsipan.index')->with('success', 'Status berhasil diHapus!');
+        return redirect()->route('kearsipan.index')->with('success', 'Status berhasil dihapus!');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
     }
+}
     public function updateStatus($id)
     {
         // Ambil data peminjaman berdasarkan ID

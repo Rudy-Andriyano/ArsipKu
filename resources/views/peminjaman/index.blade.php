@@ -151,14 +151,14 @@
           <a href="{{ route('backup') }}" class="btn btn-success">Download Backup</a>
 
 <!-- Restore Form masih gagal -->
-{{-- <form action="{{ route('restore') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('restore') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div>
         <label>Upload Backup File:</label>
-        <input type="file" name="file" required>
+        <input type="file" name="file" required accept=".sql">
     </div>
     <button type="submit" class="btn btn-primary">Restore</button>
-</form> --}}
+</form>
 
           <div class="table-responsive text-nowrap">
           @if($peminjamans->isNotEmpty())
