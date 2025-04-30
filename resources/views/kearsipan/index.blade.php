@@ -75,16 +75,18 @@
                         <div class="row g-3 align-items-center">
                           <div class="col-md-4">
                             <select name="category" class="form-select">
-                              <option value="">Select Category</option>
+                              <option value="">Pilih Kategori</option>
                               <option value="nama" {{ request('category') == 'nama' ? 'selected' : '' }}>Nama</option>
                               <option value="nip" {{ request('category') == 'nip' ? 'selected' : '' }}>NIP</option>
                             </select>
                           </div>
                           <div class="col-md-4">
-                            <input type="text" name="search" class="form-control" value="{{ request('search') }}" placeholder="Search...">
+                            <input type="text" name="search" class="form-control" value="{{ request('search') }}" placeholder="Ketik Yang Ingin Dicari...">
                           </div>
                           <div class="col-md-4">
-                            <button type="submit" class="btn btn-primary w-100">Search</button>
+                            <button type="button" class="btn btn-primary w-100">
+                              <span class="tf-icons bx bx-search-alt-2"></span>&nbsp; 
+                            </button>
                           </div>
                         </div>
                       </form>

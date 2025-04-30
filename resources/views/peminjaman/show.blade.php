@@ -40,16 +40,6 @@
             <input class="form-control shadow-sm rounded-3 border-primary" type="date" name="tanggal_pinjam" value="{{ $peminjaman->tanggal_pinjam }}" readonly>
           </div>
           <div class="mb-3">
-            <label class="form-label">Bukti Peminjaman</label>
-            <img src="{{asset('storage/'.$peminjaman->bukti_peminjaman)}}" alt="" style="width:300px; aspect-ration:1/1; object-fit:cover;">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Bukti Pengembalian</label>
-            <img src="{{asset('storage/'.$peminjaman->bukti_pengembalian)}}" alt="Belum ada pengembalian" style="width:300px; aspect-ration:1/1; object-fit:cover;">
-          </div>
-         
-
-          <div class="mb-3">
             <label class="form-label">Perihal layanan</label>
             <input type="text" name="perihal" class="form-control" value="{{ $peminjaman->perihal }}" readonly>
           </div>
@@ -57,9 +47,23 @@
             <label class="form-label">Arsip yang Dipinjam</label>
             <input type="text" name="arsip_pinjam" class="form-control" value="{{ $peminjaman->arsip_pinjam }}"readonly>
           </div>
-
-         
-          <a href="{{ route('peminjaman.index') }}" class="btn btn-secondary">Balik</a>
+          <div class="d-flex justify-content-between">
+            <!-- Kiri -->
+            <div class="text-center">
+              <label class="form-label">Bukti Peminjaman</label><br>
+              <img src="{{ asset('storage/'.$peminjaman->bukti_peminjaman) }}" alt="" 
+              style="width:300px; aspect-ratio:1/1; object-fit:cover; margin-top:10px; border-radius:15px;">
+            </div>
+          
+            <!-- Kanan -->
+            <div class="text-center">
+              <label class="form-label">Bukti Pengembalian</label><br>
+              <img src="{{ asset('storage/'.$peminjaman->bukti_pengembalian) }}" alt="Belum ada pengembalian" 
+              style="width:300px; aspect-ratio:1/1; object-fit:cover; margin-top:10px; border-radius:15px;">
+            </div>
+          </div>
+          <br>
+          <a href="{{ route('peminjaman.index') }}" class="btn btn-secondary">Kembali</a>
         </form>
       </div>
     </div>

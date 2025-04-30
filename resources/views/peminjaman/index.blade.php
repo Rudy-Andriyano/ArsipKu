@@ -128,17 +128,20 @@
             <div class="row g-3 align-items-center">
               <div class="col-md-4">
                 <select name="category" class="form-select">
-                  <option value="">Select Category</option>
+                  <option value="">Pilih Kategori</option>
                   <option value="arsip_pinjam" {{ request('category') == 'arsip_pinjam' ? 'selected' : '' }}>Arsip Pinjam</option>
                   <option value="perihal" {{ request('category') == 'perihal' ? 'selected' : '' }}>Perihal</option>
                   <option value="status" {{ request('category') == 'status' ? 'selected' : '' }}>Status</option>
                 </select>
               </div>
               <div class="col-md-4">
-                <input type="text" name="search" class="form-control" value="{{ request('search') }}" placeholder="Search...">
+                <input type="text" name="search" class="form-control" value="{{ request('search') }}" placeholder="Ketik Yang Ingin Dicari...">
               </div>
               <div class="col-md-4">
-                <button type="submit" class="btn btn-primary w-100">Search</button>
+              
+                <button type="button" class="btn btn-primary w-100">
+                  <span class="tf-icons bx bx-search-alt-2"></span>&nbsp; 
+                </button>
               </div>
             </div>
           </form>
@@ -153,14 +156,9 @@
               <th>NAMA PEGAWAI</th>
               <th>PENANGGUNG JAWAB</th>
               <th>ARSIP YANG DIPINJAM</th>
-              <th>PERIHAL</th>
               <th>WAKTU PINJAM</th>
-              <th>WAKTU KEMBALI</th>
-              <th>STATUS</th>
               <th>PENGEMBALIAN</th>
-              
               <th>AKSI</th>
-
             </tr>
           </thead>
             <tbody class="table-border-bottom-0">
@@ -169,15 +167,7 @@
               <td>{{ $peminjam->pegawai->nama_pegawai }}</td>
               <td>{{ $peminjam->kearsipan->nama }}</td>
               <td>{{ $peminjam->arsip_pinjam }}</td>
-              <td>{{ $peminjam->perihal}}</td>
               <td>{{ $peminjam->tanggal_pinjam }}</td>
-                @if ($peminjam->tanggal_kembali== null )
-                <td>Belum DiKembalikan</td>
-                @else
-                <td>{{ $peminjam->tanggal_kembali }}
-                @endif
-              </td>
-              <td>{{ $peminjam->status}}</td>
               <td>
                 @if($peminjam->status == 'dipinjam')
                 <a href="{{ route('peminjaman.pengembalian', $peminjam->id) }}" class="btn btn-warning">Proses Pengembalian</a>
@@ -198,18 +188,17 @@
                       </button>
                     <div class="dropdown-menu">
                       <a href="{{ route('generate.pdf', $peminjam->id) }}" class="dropdown-item">
-                      <i class="bx bx-download me-2"></i> Download PDF
+                      <i class="bx bx-download me-2"></i> DOWNLOAD PDF
                     </a>
                       <a href="{{ route('peminjaman.show', $peminjam->id) }}" class="dropdown-item">
-                      <i class="bx bx-download me-2"></i> Detail
+                      <i class="bx bx-detail me-2"></i> DETAIL
                     </a>
-              
               <form action="{{route('peminjaman.destroy',$peminjam->id)}}" method="POST">
                   @csrf
                 @method('DELETE')
             @if($peminjam->status == 'dipinjam')
             <a href="{{ route('peminjaman.edit', $peminjam->id) }}" class="dropdown-item"> 
-              <i class="bx bx-edit-alt me-2"></i> Edit
+              <i class="bx bx-edit-alt me-2"></i> EDIT
             </a>
             <button type="submit"
           class="dropdown-item" onclick="return confirm('Apakah Yakin Ingin Menghapus Data?')">

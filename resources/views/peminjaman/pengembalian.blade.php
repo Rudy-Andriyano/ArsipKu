@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Form /</span> pengembalian</h4>
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Form/</span>Pengembalian</h4>
 <div class="row">
   <!-- Form Controls -->
   <div class="col-md-10">
@@ -40,9 +40,9 @@
             <input class="form-control shadow-sm rounded-3 border-primary" type="date" name="tanggal_pinjam" value="{{ $peminjaman->tanggal_pinjam }}" readonly>
           </div>
           <div class="mb-3">
-            <label for="user_id" class="form-label">Bukti Pengembalian</label>
-            <td><input type="file" name="photo" required></td>
-          
+            <label for="formFile" class="form-label">Bukti Pengembalian</label>
+            <input class="form-control" type="file" name="photo" id="formFile" required>
+            <p class="mt-1">Maksimal Ukuran Gambar 2 MB</p>
           </div>
 
           <div class="mb-3">

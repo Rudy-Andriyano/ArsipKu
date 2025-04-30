@@ -23,15 +23,13 @@
               @endforeach
             </select>
           </div>
-
+          {{-- Edit --}}
           <div class="mb-3">
-            <label for="kearsipan_id" class="form-label">Penanggung Jawab</label>
-            <tr>
-              <td><label for="photo">Pilih Foto</label></td>
-              <td><input type="file" name="photo">
-              <small>Biarkan kosong jika tidak ingin mengubah foto</small></td>
-          </tr>
+            <label for="formFile" class="form-label">Penanggung Jawab</label>
+            <input class="form-control" type="file" name="photo" id="formFile">
+            <p class="mt-1">Biarkan kosong jika tidak ingin mengubah foto</p>
           </div>
+          {{-- /Edit --}}
           
           <div class="mb-3">
             <label for="kearsipan_id" class="form-label">Penanggung Jawab</label>

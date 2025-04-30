@@ -1,4 +1,3 @@
-
 @extends('layouts.sidebar')
 
 @section('content')
@@ -87,9 +86,9 @@
                 
                 </div>
                 <div class="mb-3">
-                  <label for="user_id" class="form-label">Bukti Peminjaman</label>
-                  <td><input type="file" name="photo" required></td>
-                
+                  <label for="formFile" class="form-label">Bukti Peminjaman</label>
+                  <input class="form-control" type="file" name="photo" id="formFile" required>
+                  <p class="mt-1">Maksimal Ukuran Gambar 2 MB</p>
                 </div>
                 
                 
